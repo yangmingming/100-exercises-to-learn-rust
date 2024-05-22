@@ -30,6 +30,18 @@ pub mod ticket {
             }
         }
 
+         pub fn title(&self) -> &String {
+             &self.title
+         }
+
+         pub fn description(self) -> String {
+             self.description
+         }
+
+         pub fn status(self) -> String {
+             self.status
+         }
+
         // TODO: Add three public methods to the `Ticket` struct:
         //  - `title` that returns the `title` field.
         //  - `description` that returns the `description` field.
@@ -51,11 +63,14 @@ mod tests {
     fn title() {
         let ticket = Ticket::new("A title".into(), "A description".into(), "To-Do".into());
         assert_eq!(ticket.title(), "A title");
+        assert_eq!(ticket.title(), "A title");
     }
 
     #[test]
     fn status() {
         let ticket = Ticket::new("A title".into(), "A description".into(), "To-Do".into());
+        // 即使访问了不同的变量，也会出现问题，因为整个self已经被move到函数调用处
+        // assert_eq!(ticket.description(), "A description");
         assert_eq!(ticket.status(), "To-Do");
     }
 }
