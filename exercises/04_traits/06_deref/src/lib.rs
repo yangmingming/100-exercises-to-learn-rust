@@ -10,13 +10,14 @@ pub struct Ticket {
     status: String,
 }
 
+// trim Methods from Deref<Target = str>
 impl Ticket {
     pub fn title(&self) -> &str {
-        todo!()
+        self.title.trim()
     }
 
     pub fn description(&self) -> &str {
-        todo!()
+        self.description.trim()
     }
 }
 

@@ -13,6 +13,33 @@
 // You don't have to though: it's perfectly okay to write three separate
 // implementations manually. Venture further only if you're curious.
 
+
+// 定义一个新的 trait，名为 `Power`，它有一个方法 `power`，返回Self
+trait Power<N> {
+    fn power(&self, n:N) -> Self;
+}
+
+// 为 `u32` 类型实现 `Power` trait，其中 `n` 类型为 `u16`。
+impl Power<u16> for u32 {
+    fn power(&self, num : u16) -> u32 {
+        self.pow(num.into())
+    }
+}
+
+// 为 `u32` 类型实现 `Power` trait，其中 `n` 类型为 `u32`。
+impl Power<u32> for u32 {
+    fn power(&self, num : u32) -> u32 {
+        self.pow(num)
+    }
+}
+
+// 为 `u32` 类型实现 `Power` trait，其中 `n` 类型为 `&u32`。
+impl Power<&u32> for u32 {
+    fn power(&self, num : &u32) -> u32 {
+        self.pow(*num)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::Power;
