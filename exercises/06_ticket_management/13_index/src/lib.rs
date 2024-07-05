@@ -11,6 +11,21 @@ pub struct TicketStore {
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct TicketId(u64);
 
+use std::ops::Index;
+impl Index<TicketId> for TicketStore {
+    type Output = Ticket;
+    fn index(&self, index: TicketId) -> &Self::Output {
+        self.tickets.iter().find(|&ticket| ticket.id == index).unwrap()
+    }
+}
+
+impl Index<&TicketId> for TicketStore {
+    type Output = Ticket;
+    fn index(&self, index: &TicketId) -> &Self::Output {
+		&self[*index]
+    }
+}
+
 #[derive(Clone, Debug, PartialEq)]
 pub struct Ticket {
     pub id: TicketId,
